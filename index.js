@@ -7,6 +7,9 @@ require('dotenv').config({path: '.env'});
 
 app.use(bodyParser.json());
 
+
+
+
 const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
