@@ -7,9 +7,6 @@ require('dotenv').config({path: '.env'});
 
 app.use(bodyParser.json());
 
-
-
-
 const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -17,7 +14,7 @@ const client = new Client({
     }
   });
 
-  client.connect();
+client.connect();
 
 //Contact Endpoint
 app.get('/contact/list', (req, res) => {
@@ -115,5 +112,4 @@ app.put('/contract/modify/:id', (req, res) => {
     });
 });
 
-
-app.listen(3000, () => console.log('Example app is listening on port 3000.'));
+app.listen(process.env.PORT || 3000, () => console.log('Example app is listening on port 3000.'));
