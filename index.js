@@ -71,7 +71,7 @@ app.post('/contact/add', (req, res) => {
 });
 
 app.put('/contact/modify/:id', (req, res) => {
-    client.query(`UPDATE salesforce.contact SET FirstName = 'req.body.firstname}', LastName='req.body.lastname', Email='req.body.email' WHERE Id = '${req.params.id}';`, (err, contacts) => {
+    client.query(`UPDATE salesforce.contact SET FirstName = '${req.body.firstname}}', LastName='${req.body.lastname}', Email='${req.body.email}' WHERE Id = '${req.params.id}';`, (err, contacts) => {
         if (err) throw err;
         for (let row of contacts.rows) {
             console.log(JSON.stringify(row));
