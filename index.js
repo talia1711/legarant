@@ -18,7 +18,7 @@ client.connect();
 
 //Account Endpoint
 app.post('/account/add', (req, res) => {
-    client.query(`INSERT INTO salesforce.account (Name, AccountNumber, Rating,) VALUES ('${req.body.name}','${req.body.accountnumber}', '${req.body.rating}');`, (err, account) => {
+    client.query(`INSERT INTO salesforce.account (Name, AccountNumber, Rating) VALUES ('${req.body.name}','${req.body.accountnumber}', '${req.body.rating}');`, (err, account) => {
         if (err) throw err;
         for (let row of account.rows) {
           console.log(JSON.stringify(row));
