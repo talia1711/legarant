@@ -16,6 +16,27 @@ const client = new Client({
 
 client.connect();
 
+//Account Endpoint
+app.post('/account/add', (req, res) => {
+    client.query(`INSERT INTO salesforce.account (Name, AccountNumber, Rating,) VALUES ('${req.body.name}','${req.body.accountnumber}', '${req.body.rating}');`, (err, account) => {
+        if (err) throw err;
+        for (let row of account.rows) {
+          console.log(JSON.stringify(row));
+        }
+        res.send('Account was created');
+      });
+});
+
+app.put('/account/modify/:id', (req, res) => {
+    client.query(`UPDATE salesforce.account SET Name = '${req.body.name}', AccountNumber = '${req.body.accountnumber}', Rating = '${req.body.rating}' WHERE Id = '${req.params.id}';`, (err, account) => {
+        if (err) throw err;
+        for (let row of account.rows) {
+            console.log(JSON.stringify(row));
+        }
+        res.send(`Account with id = ${req.params.id} was modified`);
+    });
+});
+
 //Contact Endpoint
 app.get('/contact/list', (req, res) => {
     client.query('SELECT Id, FirstName,LastName,Birthdate FROM salesforce.contact;', (err, contacts) => {
