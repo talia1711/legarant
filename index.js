@@ -79,7 +79,7 @@ app.post('/contact/add', (req, res) => {
               });
               console.log('Adding a new contact')
         } else {
-            client.query(`UPDATE salesforce.contact SET sfid = '${getContacts.rows[0].sfid}' WHERE Email = '${req.body.email}';`, (err, updatedContacts) => {
+            client.query(`UPDATE salesforce.contact SET sfid = '${getContacts.rows[0].sfid}', FirstName = '${req.body.firstname}', LastName='${req.body.lastname}' WHERE Email = '${req.body.email}';`, (err, updatedContacts) => {
                 if (err) throw err;
                 for (let row of updatedContacts.rows) {
                     console.log(JSON.stringify(row));
@@ -92,7 +92,7 @@ app.post('/contact/add', (req, res) => {
 });
 
 app.put('/contact/modify/:id', (req, res) => {
-    client.query(`UPDATE salesforce.contact SET FirstName = '${req.body.firstname}}', LastName='${req.body.lastname}', Email='${req.body.email}' WHERE Id = '${req.params.id}';`, (err, contacts) => {
+    client.query(`UPDATE salesforce.contact SET FirstName = '${req.body.firstname}', LastName='${req.body.lastname}', Email='${req.body.email}' WHERE Id = '${req.params.id}';`, (err, contacts) => {
         if (err) throw err;
         for (let row of contacts.rows) {
             console.log(JSON.stringify(row));
